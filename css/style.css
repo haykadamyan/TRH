@@ -1,4 +1,16 @@
 canvas{
 			position: absolute;
 			cursor: url('../img/cursor.cur'), auto;
+			float: left;
 		}
+
+#tools{
+	width: 50px;
+	height: 398px;
+	border: 1px solid silver;
+	float: right;
+}
+
+#all{
+	width: 480px;
+}
