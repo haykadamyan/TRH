@@ -44,13 +44,11 @@ window.onload = function(){
 
     $('#canvas').mousedown(function(){
     	mousd = true;
-    	console.log(mousd);
     });
 
 
     $('#canvas').mouseup(function(){
     	mousd = false;
-    	console.log(mousd);
     });
 
     $('#canvas').mousemove(function(event){
