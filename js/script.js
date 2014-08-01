@@ -23,12 +23,23 @@ window.onload = function(){
       ctx.drawImage(trash, 70, 187);
     };
     
-   
+   var unqer = new Image();
+
+   unqer.onload = function(){
+        ctx.drawImage(unqer, 115, 140);
+   }
     
+   var mazer = new Image();
+   mazer.onload = function(){
+    ctx.drawImage(mazer, 65, 30);
+   }
 
 
     trash.src = 'img/trash.png';
-  
+    unqer.src = 'img/unqer.png';
+    mazer.src = 'img/mazer.png';
+
+
     var mousd = false;
 
     $('#canvas').mousedown(function(){
@@ -44,9 +55,10 @@ window.onload = function(){
 
     $('#canvas').mousemove(function(event){
 
-    	var x=event.clientX;
-		var y=event.clientY;
+    	var x=event.clientX - 10;
+		var y=event.clientY - 10;
 
+       
 		if(mousd){
 			ctx.clearRect(x,y,10,10);
 		}
