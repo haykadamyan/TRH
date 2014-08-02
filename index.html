@@ -2,26 +2,16 @@
 <html>
 <head>
 	<title>Trashir hrairin</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<style type="text/css">
+		canvas{position: absolute; cursor: url('img/cursor.cur'), auto;}
+	</style>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/create.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
-
-
-
-	<div id="all">
-
-		<canvas id="bg_canvas" width="600" height="600"></canvas>
-		<canvas id="canvas" width="600" height="600"></canvas>
-
-		<div id="tools"></div>
-
-
-	</div>
-
-	
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+	<canvas id="bg_canvas" width="400" height="400" style="background: url('img/untrash.png');"></canvas>
+	<canvas id="canvas" width="400" height="400"></canvas>
 </body>
 </html>

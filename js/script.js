@@ -1,69 +1,73 @@
-window.onload = function(){
 
-	var game_canvas = new createjs.Stage("cursor");
+var bg_canvas, game_canvas, queue;
+var game_ctx, game_canvas_ctx;
+var untrash, trash, unqer, mazer, mousd;
+var x, y;
 
+window.addEventListener('load', init);
 
-	var bg_canvas = document.getElementById('bg_canvas');
-    var bg_ctx = bg_canvas.getContext('2d');
-    var imageObj = new Image();
+function init() {
 
-    imageObj.onload = function() {
-      bg_ctx.drawImage(imageObj, 0, 0);
-    };
-    
-    imageObj.src = 'img/untrash.png';
-  
+	bg_canvas = new createjs.Stage("bg_canvas");
+	game_canvas = new createjs.Stage("canvas");
 
-   
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    var trash = new Image();
+	game_canvas_ctx = document.getElementById('canvas');
+	game_ctx = game_canvas_ctx.getContext('2d');
 
-    trash.onload = function() {
-      ctx.drawImage(trash, 70, 187);
-    };
-    
-   var unqer = new Image();
+	queue = new createjs.LoadQueue(false);
+	queue.addEventListener("complete", handleComplete);
 
-   unqer.onload = function(){
-        ctx.drawImage(unqer, 115, 140);
-   }
-    
-   var mazer = new Image();
-   mazer.onload = function(){
-    ctx.drawImage(mazer, 65, 30);
-   }
+	queue.loadManifest([
+		{id:"untrash", src:"img/untrash.png"}, 
+		{id:"trash", src:"img/trash.png"},
+		{id:"unqer", src:"img/unqer.png"},
+		{id:"mazer", src:"img/mazer.png"}
+	]);
 
+	function handleComplete() {
 
-    trash.src = 'img/trash.png';
-    unqer.src = 'img/unqer.png';
-    mazer.src = 'img/mazer.png';
+		untrash = new createjs.Bitmap(queue.getResult("untrash"));
+		trash = new createjs.Bitmap(queue.getResult("trash"));
+		unqer = new createjs.Bitmap(queue.getResult("unqer"));
+		mazer = new createjs.Bitmap(queue.getResult("mazer"));
 
+		untrash.x = 0;
+		untrash.y = 0;
+		trash.x = 70;
+		trash.y = 187;
+		unqer.x = 115;
+		unqer.y = 140;
+		mazer.x = 65;
+		mazer.y = 30;
 
-    var mousd = false;
-
-    $('#canvas').mousedown(function(){
-    	mousd = true;
-    });
+		mousd = false;
 
 
-    $('#canvas').mouseup(function(){
-    	mousd = false;
-    });
+		bg_canvas.addChild(untrash);
+		game_canvas.addChild(trash);
+		game_canvas.addChild(unqer);
+		game_canvas.addChild(mazer);
 
-    $('#canvas').mousemove(function(event){
+		$('#canvas').mousedown(function(){
+			mousd = true;
+		});
 
-    	var x=event.clientX - 10;
-		var y=event.clientY - 10;
+		$('#canvas').mouseup(function(){
+			mousd = false;
+		});
 
-       
-		if(mousd){
-			ctx.clearRect(x,y,10,10);
-		}
+		$('#canvas').mousemove(function(evt){
+			x = evt.clientX - 10;
+			y = evt.clientY - 10;
 
-    });
+			if(mousd){
+				game_ctx.clearRect(x, y, 15, 15);
+			}
+		});
 
-    
+		game_canvas.update();
 
+	}
 
-};
+}
+
